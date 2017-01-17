@@ -15,11 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+     <script src="js/ajax.js"></script> 
 
     <style>
         body {
             font-family: 'Lato';
             background-color: #fff;
+            height: 80px;
         }
 
         .fa-btn {
@@ -28,7 +32,7 @@
         #alert {
             text-align: center;
             font-size: 13px;
-            margin: 0 400px 0px 400px;
+            margin: 0 300px 0px 300px;
             padding-top: 5px;
             padding-bottom: 5px;
         }
@@ -92,11 +96,13 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user fa-fw"></i> 
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
-                            <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu form-control">
+                                <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+                                <li><a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Settings</a></li>
+                                <li class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

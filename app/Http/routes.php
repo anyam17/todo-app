@@ -28,10 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/register', 'taskController@register');
 	Route::post('/assigntask/assignedtask', 'taskController@assignTask');
 	Route::get('/assigntask', 'taskController@showTaskToAssign');
-	Route::get('/assigntask/assignedtask/h', 'taskController@showAssignedTask');
+	Route::get('/assigntask/update', 'taskController@getTaskId');
+	//Route::get('/home', 'taskController@homeRefresh');
 
  });
 
 	Route::auth();
 
-	Route::get('/home', 'HomeController@index');
+	Route::get('/home', 'taskController@homeRefresh');

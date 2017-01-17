@@ -14,7 +14,6 @@
         <div class="panel panel-default" style="margin: 0 50px 0px 50px; ">
             <div class="panel-heading" style="font-size: 16px">
                 Available Tasks
-                <div style="float: right;"><a href="logout" style="font-size: 12px; font-weight: bold;">Logout</a></div>
             </div>
             @if (count($tasks) > 0)
                 <div class="panel-body" style="padding-bottom: 0px; ">
@@ -29,10 +28,15 @@
                         </thead>
                         <!-- Table Body -->
                         <tbody style="padding-bottom: 0px; font-size: 13px; ">
-                            @foreach ($tasks as $task)         
+                            @foreach ($tasks as $key => $task)         
                                 <tr>
                                     <td>
-                                        <div>{{ $task->id }}</div>
+                                        <div> @if(Request::has('page')) 
+                                                    {{ (Request::get('page')-1)*3+$key+1 }}
+                                                @else
+                                                    {{ $key+1 }}
+                                                @endif
+                                        </div>
                                     </td>
                                     <td>
                                         <div>{{ $task->name }}</div>
@@ -47,15 +51,17 @@
                                             <button type="submit" class="btn btn-sm btn-success" style="font-size: 11px">{{ $task-> status }}</button>
                                             <input type="hidden" name="id" value="{{ $task->id }}">
                                         </form>
-                                        @else
+                                        @elseif ($task->status == 'done')
                                             <button class="btn btn-sm btn-success" disabled style="font-size: 11px"> {{ $task->status }} </button>
+                                        @else
+                                            <button class="btn btn-sm btn-danger" disabled style="font-size: 11px"> {{ $task->status }} </button>
                                         @endif
                                     </td>
                                     <td>
                                         <form method="post" action="/task/delete">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-sm btn-danger" style="font-size: 11px" onclick="return ConfirmDelete();">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" style="font-size: 11px" onclick="return ConfirmDelete();"><i class="fa fa-trash-o fa-lg"></i>&nbsp; Delete</button>
                                             <input type="hidden" name="id" value="{{ $task->id }}">
                                         </form>
                                     </td>
@@ -73,7 +79,6 @@
                 </form>
             </div>
         </div>
-
         <div class="pagination" style="margin: 0 50px 10px 50px""> {{ $tasks->links() }} </div>
     </div>
 </div> 

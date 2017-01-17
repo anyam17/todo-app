@@ -16,8 +16,9 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('name');
+            $table->date('expiry_date');
             $table->timestamps();
-            $table->enum('status',['undone', 'done'])->default('undone');
+            $table->enum('status',['undone', 'done', 'expired'])->default('undone');
         });
     }
 
